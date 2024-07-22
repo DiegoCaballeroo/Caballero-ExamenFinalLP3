@@ -1,5 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<h1>Listado de personas</h1>
+<ul>
+    {% for persona in persona %}
+        <li>{{ persona.nombre }} {{ persona.apellidos }} - 
+            Estado: {{ persona.sexo|yesno:"Masculino,Femenino" }} - 
+            {{ persona.fecha_de_registro }}
+            <a href="{% url 'eliminar_persona' id=persona.id %}" class="btn btn-delete">Eliminar</a>
+        </li>
+    {% endfor %}
+</ul>
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 {% endblock %}
